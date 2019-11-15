@@ -7,9 +7,13 @@
 </ion-header>
 
 <ion-content ion-padding>
-  <h1>Click Button To Scan</h1>
-
-  <ion-button expand="full" color="primary"  (click)="scanCode()">
+  <h1 id="headText">Click Button To Scan</h1>
+  <style>
+    #headText {
+      text-align: center;
+    }
+  </style>
+  <ion-button expand="full" color="primary" (click)="scanCode()">
     Démarrer le scan
   </ion-button>
 </ion-content>
