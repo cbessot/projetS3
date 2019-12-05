@@ -1,5 +1,12 @@
 {
+<<<<<<< HEAD
   "name": "myProject",
   "integrations": {},
+=======
+  "name": "projet",
+  "integrations": {
+    "cordova": {}
+  },
+>>>>>>> 8e7338b0b43d99b386260e3d04a01800ac276488
   "type": "angular"
 }
