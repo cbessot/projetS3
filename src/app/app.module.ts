@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { FormsModule } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Brightness } from '@ionic-native/brightness/ngx';
+//import { Sensors, SensorsOriginal } from '@ionic-native/sensors'
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +24,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     SplashScreen,
     BarcodeScanner,
     Geolocation,
+    Brightness,
+    //SensorsOriginal,
+    
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
