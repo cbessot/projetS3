@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Brightness } from '@ionic-native/brightness/ngx';
+import { TimeInterval } from 'rxjs';
 //import { Sensors, SensorsOriginal } from '@ionic-native/sensors'
 
 @Component({
@@ -10,17 +11,16 @@ import { Brightness } from '@ionic-native/brightness/ngx';
 })
 export class Tab3Page {
 
-  location:string='';  //données GPS
-  luminosity:Promise<any>;
-  var:number = 0;
-  temperature:string="";
+
   constructor(private geolocation: Geolocation, private brightness: Brightness) {}
 
+  //var interval:TimeInterval;
   locate(){
     this.geolocation.getCurrentPosition().then((resp) => {
       // resp.coords.latitude
       // resp.coords.longitude
-      this.location = "lattitude : " + resp.coords.latitude + " longitude : "+ resp.coords.longitude;
+      console.log(resp.coords.latitude, resp.coords.longitude);
+     
      }).catch((error) => {
        console.log('Error getting location', error);
      });
@@ -39,7 +39,6 @@ export class Tab3Page {
   //   this.temperature = this.sensors.enableSensor(SensorsOriginal.TYPE_AMBIENT_TEMPERATURE);
   // }
   luminate(){
-    let brightnessValue = 0.8;
-    this.brightness.setBrightness(brightnessValue);
+    console.log(this.brightness.getBrightness());
   }
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +9,27 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  var:any;
 
-}
+  constructor(private geolocation: Geolocation) {}
+  locate(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+      // resp.coords.latitude
+      // resp.coords.longitude
+      console.log(resp.coords.latitude, resp.coords.longitude);
+     
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+  }
+  
+  locationRepeat(){
+     this.var = setInterval(function(){ 
+     this.locate(); 
+      }, 3000);
+   }
+
+  stopLocation(){
+    clearInterval(this.var);
+  }
+  }

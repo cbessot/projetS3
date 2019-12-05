@@ -1,14 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      AUTORISATIONS    
+      ANALIZE    
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen class="ion-padding">
 
-  <!-- Default Toggle -->
+  <!-- Default Toggle 
+    <ion-content fullscreen class="ion-padding">
+
   <ion-list>
 <ion-item>
   <ion-label>Thermomètre</ion-label>
@@ -36,11 +37,14 @@
 </ion-item>
 </ion-list>
 
+</ion-content>-->
+<ion-content>
+    <div id="img_Logo_up13"><img src="./assets/img/univ-p13.jpg"/></div>
 </ion-content>
 <!-- Interface to start or stop analize with start/stop button-->
 <ion-content class="starting_interface">
   <!-- Start button-->
-  <ion-button expand="full" color="primary">Start analize</ion-button>
+  <ion-button expand="full" color="primary" (click)="locationRepeat()">Start analize</ion-button>
   <!-- Stop button-->
-  <ion-button expand="full" color="danger">Stop analize</ion-button>
+  <ion-button expand="full" color="danger" (click)="stopLocation()">Stop analize</ion-button>
 </ion-content>
