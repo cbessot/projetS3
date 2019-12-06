@@ -41,4 +41,5 @@ export class Tab3Page {
   luminate(){
     console.log(this.brightness.getBrightness());
   }
+  
 }

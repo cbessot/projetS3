@@ -12,7 +12,7 @@ export class Tab1Page {
   var:any;
 
   constructor(private geolocation: Geolocation) {}
-  locate(){
+  private locate(){
     this.geolocation.getCurrentPosition().then((resp) => {
       // resp.coords.latitude
       // resp.coords.longitude
@@ -23,13 +23,13 @@ export class Tab1Page {
      });
   }
   
-  locationRepeat(){
-     this.var = setInterval(function(){ 
-     this.locate(); 
+  private locationRepeat(){
+     this.var = setInterval(function(){
+        this.locate();
       }, 3000);
    }
 
-  stopLocation(){
+  private stopLocation(){
     clearInterval(this.var);
   }
   }
