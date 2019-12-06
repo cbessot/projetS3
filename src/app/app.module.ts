@@ -13,12 +13,14 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { FormsModule } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Brightness } from '@ionic-native/brightness/ngx';
+
+
 //import { Sensors, SensorsOriginal } from '@ionic-native/sensors'
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,],
   providers: [
     StatusBar,
     SplashScreen,
