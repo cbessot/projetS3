@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Brightness } from '@ionic-native/brightness/ngx';
 import { TimeInterval } from 'rxjs';
-//import { Sensors, SensorsOriginal } from '@ionic-native/sensors'
+//import { Sensors } from '@ionic-native/sensors'
 
 @Component({
   selector: 'app-tab3',
@@ -11,11 +11,13 @@ import { TimeInterval } from 'rxjs';
 })
 export class Tab3Page {
 
-
+  var:any;
   constructor(private geolocation: Geolocation, private brightness: Brightness) {}
 
   //var interval:TimeInterval;
   locate(){
+    
+    console.log(this.geolocation);
     this.geolocation.getCurrentPosition().then((resp) => {
       // resp.coords.latitude
       // resp.coords.longitude
@@ -25,6 +27,19 @@ export class Tab3Page {
        console.log('Error getting location', error);
      });
   }
+  locationRepeat(){
+    this.var = setInterval(() => {
+      this.locate()
+    },3000)
+  }
+
+  stopLocation(){
+   clearInterval(this.var);
+ }
+ /*sensorTest(){
+  Sensors.enableSensor("TYPE_SENSOR");
+  console.log(Sensors.getState ());
+ }*/
 
   // locationRepeat(){
   //   var i:number = 0;
@@ -38,8 +53,7 @@ export class Tab3Page {
   // temperate(){
   //   this.temperature = this.sensors.enableSensor(SensorsOriginal.TYPE_AMBIENT_TEMPERATURE);
   // }
-  luminate(){
-    console.log(this.brightness.getBrightness());
-  }
+
+
   
 }
