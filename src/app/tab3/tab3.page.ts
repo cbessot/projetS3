@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Brightness } from '@ionic-native/brightness/ngx';
+//import { Brightness } from '@ionic-native/brightness/ngx';
 import { TimeInterval } from 'rxjs';
+import { OpenNativeSettings } from '@ionic-native/open-native-settings/ngx';
+
 //import { Sensors } from '@ionic-native/sensors'
 
 @Component({
@@ -12,7 +14,15 @@ import { TimeInterval } from 'rxjs';
 export class Tab3Page {
 
   var:any;
-  constructor(private geolocation: Geolocation, private brightness: Brightness) {}
+  constructor(private geolocation: Geolocation,private openNativeSettings: OpenNativeSettings) {}
+
+  accessibility(setting: string){
+    this.openNativeSettings.open(setting).then(val => {
+      alert(setting);
+    }).catch(err => {
+      alert(JSON.stringify(err));
+    })
+  }
 
   //var interval:TimeInterval;
   locate(){
