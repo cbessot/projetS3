@@ -75,7 +75,7 @@ export class Tab1Page{
   }
 
   initSensor() {
-    this.sensors.enableSensor("LIGHT")
+    sensors.enableSensor("LIGHT")
     setInterval(() => {
       sensors.getState((values) => {
         this.proximity = values[0]
