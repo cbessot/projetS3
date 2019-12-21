@@ -13,18 +13,17 @@ declare var sensors;
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page{
-  
   var:any; //var to stock the interval
   proximity:number;
 
-  constructor(private geolocation: Geolocation,private alertController: AlertController,  platform: Platform) {
+  constructor(private geolocation: Geolocation,private alertController: AlertController,  platform: Platform, private sensors:Sensors) {
 
-    this.proximity = 0;
+   /* this.proximity = 0;
     
     platform.ready().then(() => {
       this.initSensor();
     })
-
+*/
   }
   
   //function to catch geolocation data
@@ -40,18 +39,16 @@ export class Tab1Page{
      });
   }
 
-
   //interval about function of data collect
 
   locationRepeat(){
-    this.presentAlert();
-    this.var = setInterval(() => {
-      this.locate()
-    },3000)
+   // this.presentAlert('Demarrage de l\'analyse','Appuyez sur \'GO\' pour commencez','GO');
+   this.presentAlertConfirmStartAnalyze();
   }
 
    stopLocation(){
     clearInterval(this.var);
+    this.presentAlert('Fin de l\'analyse','merci d\'avoir participé','Ok');
   }
   //ALERT
  //Error alert
@@ -65,26 +62,54 @@ export class Tab1Page{
   }
 
   //Starting alert 
-  async presentAlert() {
+  async presentAlert(msg,msg2,msg3) {
     const alert = await this.alertController.create({
-      header: 'C\'est parti !',
-      message: 'Démarrage de l\'analyse',
-      buttons: ['Let\'s go']
+      header: msg,
+      message: msg2,
+      buttons: [msg3]
     });
     await alert.present();
   }
 
-  initSensor() {
-    sensors.enableSensor("LIGHT")
+  //alert With Multiple Choice and referenced to function start : yes/no
+  // with the yes-button , let's start the analyze, with the no-button it cancel alert and don't start analyze
+  async presentAlertConfirmStartAnalyze() {
+    const alert = await this.alertController.create({
+      header: 'Démarage de l\'analyse',
+      message: 'Etes-vous prêt à commencer l\'analyse ?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (Cancel) => {
+            console.log('Cancel button was enable');
+          }
+        }, {
+          text: 'Yes',
+          handler: (Go) => {
+            this.var = setInterval(() => {
+              this.locate()
+            },3000)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  /*initSensor() {
+    sensors.enableSensor("PROXIMITY")
     setInterval(() => {
       sensors.getState((values) => {
         this.proximity = values[0]
       });
     }, 300)
     console.log(this.proximity);
-  }
+  }*/
 
- /* initSensor(){
+  /*initSensor(){
     sensors.enableSensor("LIGHT");
     console.log(sensors.getState());
   }*/
