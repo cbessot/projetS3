@@ -4,7 +4,7 @@ import { Time } from '@angular/common';
 import { Platform } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Sensors, TYPE_SENSOR } from '@ionic-native/sensors/ngx';
-
+import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 declare var sensors;
 
 @Component({
@@ -19,20 +19,20 @@ export class Tab1Page{
   constructor(private geolocation: Geolocation,private alertController: AlertController,  platform: Platform, private sensors:Sensors) {
 
    /* this.proximity = 0;
-    
+
     platform.ready().then(() => {
       this.initSensor();
     })
 */
   }
-  
+
   //function to catch geolocation data
    locate(){
     this.geolocation.getCurrentPosition().then((resp) => {
       // resp.coords.latitude
       // resp.coords.longitude
       console.log(resp.coords.latitude, resp.coords.longitude);
-     
+
      }).catch((error) => {
        console.log('Error getting location', error);
        this.errorAlert();
@@ -61,7 +61,7 @@ export class Tab1Page{
     await alert.present();
   }
 
-  //Starting alert 
+  //Starting alert
   async presentAlert(msg,msg2,msg3) {
     const alert = await this.alertController.create({
       header: msg,
@@ -113,4 +113,38 @@ export class Tab1Page{
     sensors.enableSensor("LIGHT");
     console.log(sensors.getState());
   }*/
+
+  async getBattery() {
+    const subscription = await this.batteryStatus.onChange().subscribe(status => {
+   console.log(status.level, status.isPlugged);
+});
+subscription.unsubscribe();
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }

@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
     "@ionic-native/barcode-scanner": "^5.16.0",
+    "@ionic-native/battery-status": "^5.19.0",
     "@ionic-native/brightness": "^5.17.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/geolocation": "^5.16.0",
@@ -31,6 +32,7 @@
     "angular-svg-round-progressbar": "^3.0.1",
     "cordova-ios": "5.0.1",
     "cordova-open-native-settings": "^1.5.2",
+    "cordova-plugin-battery-status": "^2.0.3",
     "cordova-plugin-brightness": "^0.2.0",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-sensors": "git+https://github.com/fabiorogeriosj/cordova-plugin-sensors.git",
@@ -43,7 +45,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",
-    "@angular-devkit/build-angular": "~0.801.2",
+    "@angular-devkit/build-angular": "^0.803.21",
     "@angular-devkit/core": "~8.1.2",
     "@angular-devkit/schematics": "~8.1.2",
     "@angular/cli": "~8.1.2",
@@ -86,7 +88,8 @@
       "cordova-plugin-geolocation": {},
       "cordova-plugin-brightness": {},
       "cordova-plugin-sensors": {},
-      "cordova-open-native-settings": {}
+      "cordova-open-native-settings": {},
+      "cordova-plugin-battery-status": {}
     }
   }
 }

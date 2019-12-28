@@ -14,13 +14,13 @@ import { Platform } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings/ngx';
 import { Sensors, TYPE_SENSOR } from '@ionic-native/sensors/ngx';
-
+import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,],
   providers: [
-    
+
     Sensors,
     StatusBar,
     SplashScreen,
@@ -31,8 +31,8 @@ import { Sensors, TYPE_SENSOR } from '@ionic-native/sensors/ngx';
     AlertController,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     OpenNativeSettings,
+    BatteryStatus
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
- 
