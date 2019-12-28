@@ -15,6 +15,7 @@ import { AlertController } from '@ionic/angular';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings/ngx';
 import { Sensors, TYPE_SENSOR } from '@ionic-native/sensors/ngx';
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
+import { DBMeter } from '@ionic-native/db-meter/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -31,7 +32,8 @@ import { BatteryStatus } from '@ionic-native/battery-status/ngx';
     AlertController,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     OpenNativeSettings,
-    BatteryStatus
+    BatteryStatus,
+    DBMeter
   ],
   bootstrap: [AppComponent]
 })

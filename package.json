@@ -23,6 +23,7 @@
     "@ionic-native/battery-status": "^5.19.0",
     "@ionic-native/brightness": "^5.17.0",
     "@ionic-native/core": "^5.0.0",
+    "@ionic-native/db-meter": "^5.19.0",
     "@ionic-native/geolocation": "^5.16.0",
     "@ionic-native/open-native-settings": "^5.18.0",
     "@ionic-native/sensors": "^5.17.1",
@@ -34,6 +35,7 @@
     "cordova-open-native-settings": "^1.5.2",
     "cordova-plugin-battery-status": "^2.0.3",
     "cordova-plugin-brightness": "^0.2.0",
+    "cordova-plugin-dbmeter": "^2.1.0",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-sensors": "git+https://github.com/fabiorogeriosj/cordova-plugin-sensors.git",
     "core-js": "^2.5.4",
@@ -89,7 +91,8 @@
       "cordova-plugin-brightness": {},
       "cordova-plugin-sensors": {},
       "cordova-open-native-settings": {},
-      "cordova-plugin-battery-status": {}
+      "cordova-plugin-battery-status": {},
+      "cordova-plugin-dbmeter": {}
     }
   }
 }

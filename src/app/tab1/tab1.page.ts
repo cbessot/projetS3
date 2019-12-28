@@ -5,6 +5,7 @@ import { Platform } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Sensors, TYPE_SENSOR } from '@ionic-native/sensors/ngx';
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
+import { DBMeter } from '@ionic-native/db-meter/ngx';s
 declare var sensors;
 
 @Component({
@@ -16,7 +17,7 @@ export class Tab1Page{
   var:any; //var to stock the interval
   proximity:number;
 
-  constructor(private geolocation: Geolocation,private alertController: AlertController,  platform: Platform, private sensors:Sensors) {
+  constructor(private geolocation: Geolocation,private alertController: AlertController,  platform: Platform, private sensors:Sensors,private dbMeter: DBMeter) {
 
    /* this.proximity = 0;
 
@@ -121,6 +122,13 @@ export class Tab1Page{
 subscription.unsubscribe();
 
 
+  }
+
+  async getDB() {
+    let subscription = await this.dbMeter.start().subscribe(
+  data => console.log(data)
+);
+subscription.unsubscribe();
   }
 
 
