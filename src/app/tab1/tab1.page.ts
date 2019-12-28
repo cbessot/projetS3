@@ -5,7 +5,7 @@ import { Platform } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Sensors, TYPE_SENSOR } from '@ionic-native/sensors/ngx';
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
-import { DBMeter } from '@ionic-native/db-meter/ngx';s
+import { DBMeter } from '@ionic-native/db-meter/ngx';
 declare var sensors;
 
 @Component({
@@ -130,6 +130,18 @@ subscription.unsubscribe();
 );
 subscription.unsubscribe();
   }
+
+  async getLUX() {
+    this.sens.enableSensor("LIGHT");
+
+    var promise = Promise.resolve(this.sens.getState());
+
+    promise.then(function(value) {
+      console.log(value);
+      // expected output: 123
+    });
+  }
+
 
 
 
