@@ -16,6 +16,8 @@ import { OpenNativeSettings } from '@ionic-native/open-native-settings/ngx';
 import { Sensors, TYPE_SENSOR } from '@ionic-native/sensors/ngx';
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 import { DBMeter } from '@ionic-native/db-meter/ngx';
+import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -33,7 +35,9 @@ import { DBMeter } from '@ionic-native/db-meter/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     OpenNativeSettings,
     BatteryStatus,
-    DBMeter
+    DBMeter,
+    Gyroscope,
+    SQLite
   ],
   bootstrap: [AppComponent]
 })

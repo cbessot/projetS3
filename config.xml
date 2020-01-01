@@ -3,7 +3,7 @@
     <name>MyApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -77,6 +77,9 @@
         <icon height="172" src="resources/ios/icon/icon-86@2x.png" width="172" />
         <icon height="196" src="resources/ios/icon/icon-98@2x.png" width="196" />
         <icon height="1024" src="resources/ios/icon/icon-1024.png" width="1024" />
+        <edit-config file="*-Info.plist" mode="merge" target="NSMicrophoneUsageDescription">
+            <string>need microphone access to record sounds</string>
+        </edit-config>
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="1024" src="resources/ios/splash/Default-Portrait~ipad.png" width="768" />
@@ -99,4 +102,5 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <allow-navigation href="http://localhost:8100" sessionid="b8cb5c6c" />
 </widget>

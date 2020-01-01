@@ -6,7 +6,9 @@ import { AlertController } from '@ionic/angular';
 import { Sensors, TYPE_SENSOR } from '@ionic-native/sensors/ngx';
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 import { DBMeter } from '@ionic-native/db-meter/ngx';
-declare var sensors;
+import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+
 
 @Component({
   selector: 'app-tab1',
@@ -16,9 +18,10 @@ declare var sensors;
 export class Tab1Page{
   var:any; //var to stock the interval
   proximity:number;
-
-  constructor(private geolocation: Geolocation,private alertController: AlertController,  platform: Platform, private sensors:Sensors,private dbMeter: DBMeter) {
-
+  lux:number;
+private database: SQLiteObject;
+  constructor(private sqlite: SQLite,private geolocation: Geolocation,private alertController: AlertController, private platform: Platform, private sensors:Sensors,private sensors1:Sensors,private dbMeter: DBMeter,private batteryStatus: BatteryStatus,private gyroscope: Gyroscope) {
+this.initializeDatabase();
    /* this.proximity = 0;
 
     platform.ready().then(() => {
@@ -26,6 +29,7 @@ export class Tab1Page{
     })
 */
   }
+
 
   //function to catch geolocation data
    locate(){
@@ -115,32 +119,100 @@ export class Tab1Page{
     console.log(sensors.getState());
   }*/
 
-  async getBattery() {
-    const subscription = await this.batteryStatus.onChange().subscribe(status => {
-   console.log(status.level, status.isPlugged);
+async getBattery() {
+  const subscription = this.batteryStatus.onChange().subscribe(status => {
+ console.log(status.level, status.isPlugged);
 });
-subscription.unsubscribe();
+
 
 
   }
 
   async getDB() {
-    let subscription = await this.dbMeter.start().subscribe(
-  data => console.log(data)
+    let subscription = this.dbMeter.start().subscribe(
+  data => {console.log(data);
+  }
 );
-subscription.unsubscribe();
+
+
   }
 
-  async getLUX() {
-    this.sens.enableSensor("LIGHT");
+   async getLUX() {
 
-    var promise = Promise.resolve(this.sens.getState());
+    this.sensors.enableSensor("LIGHT");
 
-    promise.then(function(value) {
-      console.log(value);
-      // expected output: 123
-    });
+    const promise = await Promise.resolve(this.sensors.getState()).catch(error => console.log(error));
+    return promise[0];
+
+
   }
+
+  getGyro() {
+    this.gyroscope.getCurrent().then((orientation: GyroscopeOrientation) => {
+     console.log(orientation.x, orientation.y, orientation.z, orientation.timestamp);
+   });
+  }
+
+getTemp() {
+  this.sensors.enableSensor("TEMPERATURE");
+
+  const promise = Promise.resolve(this.sensors.getState());
+
+  promise.then(function(value) {
+    console.log(value[0]);
+    // expected output: 123
+  }).catch(error => {console.log("erreur")});
+
+}
+
+
+
+
+
+
+
+
+
+
+
+  private async initializeDatabase() {
+// Create or open a table
+this.sqlite.create({
+  name: "data.db",
+  location: "default",
+  // Key/Password used to encrypt the database
+  // Strongly recommended to use Identity Vault to manage this
+  key: "153009992DK"
+}).then((db: SQLiteObject) => {
+  this.database = db;
+
+  db.executeSql(
+    'CREATE TABLE IF NOT EXISTS capteurs(lux, celsius, decibel, localisationLa,localisationLo,batterie,gyroscope,temp)', [])
+    .then(() => console.log('Successfully created software table.'))
+      .catch(e => console.log(e));
+  }).catch(e => console.log(e));
+}
+
+async insertD() {
+setInterval(async () => {
+const valu = await this.getLUX();
+  this.database.transaction((tx) => {
+tx.executeSql("INSERT INTO capteurs (lux, celsius, decibel, localisationLa,localisationLo,batterie,gyroscope,temp) VALUES (?,?,?,?,?,?,?,?)",
+[ valu , "35", "45", "3.15288","4.54898","86","465","465498"], (tx, result) => {
+  console.log("insertId: " + result.insertId);  // New Id number
+  console.log("rowsAffected: " + result.rowsAffected);  // 1
+});
+});},3000);}
+
+
+
+
+
+
+async getTest() {
+  setInterval(async () => {const valu = await this.getLUX();
+console.log(valu);},3000);}
+
 
 
 
