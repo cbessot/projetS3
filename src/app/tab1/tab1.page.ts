@@ -32,16 +32,13 @@ this.initializeDatabase();
 
 
   //function to catch geolocation data
-   locate(){
-    this.geolocation.getCurrentPosition().then((resp) => {
-      // resp.coords.latitude
-      // resp.coords.longitude
-      console.log(resp.coords.latitude, resp.coords.longitude);
-
-     }).catch((error) => {
+   async locate(){
+    const loc = await this.geolocation.getCurrentPosition().catch((error) => {
        console.log('Error getting location', error);
        this.errorAlert();
      });
+     const loca = [loc.coords.latitude,loc.coords.longitude];
+     return loca;
   }
 
   //interval about function of data collect
@@ -147,10 +144,11 @@ async getBattery() {
 
   }
 
-  getGyro() {
-    this.gyroscope.getCurrent().then((orientation: GyroscopeOrientation) => {
-     console.log(orientation.x, orientation.y, orientation.z, orientation.timestamp);
-   });
+  async getGyro() {
+
+   const orientation = await Promise.resolve(this.gyroscope.getCurrent()).catch(error => console.log(error));
+   var gyro = [orientation.x,orientation.y,orientation.z];
+   return gyro
   }
 
 getTemp() {
@@ -196,9 +194,11 @@ this.sqlite.create({
 async insertD() {
 setInterval(async () => {
 const valu = await this.getLUX();
+const valus = await this.getGyro();
+const coord = await this.locate();
   this.database.transaction((tx) => {
 tx.executeSql("INSERT INTO capteurs (lux, celsius, decibel, localisationLa,localisationLo,batterie,gyroscope,temp) VALUES (?,?,?,?,?,?,?,?)",
-[ valu , "35", "45", "3.15288","4.54898","86","465","465498"], (tx, result) => {
+[ valu , "35", "45", "3.15288",coord,"86",valus,"465498"], (tx, result) => {
   console.log("insertId: " + result.insertId);  // New Id number
   console.log("rowsAffected: " + result.rowsAffected);  // 1
 });
@@ -210,7 +210,7 @@ tx.executeSql("INSERT INTO capteurs (lux, celsius, decibel, localisationLa,local
 
 
 async getTest() {
-  setInterval(async () => {const valu = await this.getLUX();
+  setInterval(async () => {const valu = await this.locate();
 console.log(valu);},3000);}
 
 
