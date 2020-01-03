@@ -17,8 +17,9 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 })
 export class Tab1Page{
   var:any; //var to stock the interval
-  proximity:number;
   lux:number;
+  decibel:number;
+  battery:number;
 private database: SQLiteObject;
   constructor(private sqlite: SQLite,private geolocation: Geolocation,private alertController: AlertController, private platform: Platform, private sensors:Sensors,private sensors1:Sensors,private dbMeter: DBMeter,private batteryStatus: BatteryStatus,private gyroscope: Gyroscope) {
 this.initializeDatabase();
@@ -28,6 +29,10 @@ this.initializeDatabase();
       this.initSensor();
     })
 */
+this.getDB();
+this.sensors.enableSensor("LIGHT");
+this.getBattery();
+
   }
 
 
@@ -116,30 +121,28 @@ this.initializeDatabase();
     console.log(sensors.getState());
   }*/
 
-async getBattery() {
+ getBattery() {
   const subscription = this.batteryStatus.onChange().subscribe(status => {
- console.log(status.level, status.isPlugged);
-});
+     this.battery=status.level;
+  });
 
 
 
-  }
-
-  async getDB() {
-    let subscription = this.dbMeter.start().subscribe(
-  data => {console.log(data);
-  }
-);
 
 
   }
+
+
 
    async getLUX() {
 
-    this.sensors.enableSensor("LIGHT");
 
-    const promise = await Promise.resolve(this.sensors.getState()).catch(error => console.log(error));
-    return promise[0];
+     const promise = await Promise.resolve(this.sensors.getState()).catch(error => {console.log("erreur");
+    return "ND";});
+   if(promise=="ND") {
+     return promise;
+   }
+   else {return promise[0];}
 
 
   }
@@ -151,19 +154,22 @@ async getBattery() {
    return gyro
   }
 
-getTemp() {
-  this.sensors.enableSensor("TEMPERATURE");
+async getTemp() {
 
-  const promise = Promise.resolve(this.sensors.getState());
-
-  promise.then(function(value) {
-    console.log(value[0]);
-    // expected output: 123
-  }).catch(error => {console.log("erreur")});
+  const promise = await Promise.resolve(this.sensors.getState()).catch(error => {console.log("erreur");
+ return "ND";});
+if(promise=="ND") {
+  return promise;
+}
+else {return promise[0];}
 
 }
 
-
+getDB() {
+  let subscription = this.dbMeter.start().subscribe(
+  data => this.decibel=data);
+  console.log("db initSensor");
+}
 
 
 
@@ -185,7 +191,7 @@ this.sqlite.create({
   this.database = db;
 
   db.executeSql(
-    'CREATE TABLE IF NOT EXISTS capteurs(lux, celsius, decibel, localisationLa,localisationLo,batterie,gyroscope,temp)', [])
+    'CREATE TABLE IF NOT EXISTS capteurs(lux, celsius, decibel, localisation,batterie,gyroscope,temp)', [])
     .then(() => console.log('Successfully created software table.'))
       .catch(e => console.log(e));
   }).catch(e => console.log(e));
@@ -193,25 +199,36 @@ this.sqlite.create({
 
 async insertD() {
 setInterval(async () => {
+this.getBattery();
 const valu = await this.getLUX();
 const valus = await this.getGyro();
 const coord = await this.locate();
+
+const db = this.decibel;
+const bat = this.battery;
+const time = Date.now();
   this.database.transaction((tx) => {
-tx.executeSql("INSERT INTO capteurs (lux, celsius, decibel, localisationLa,localisationLo,batterie,gyroscope,temp) VALUES (?,?,?,?,?,?,?,?)",
-[ valu , "35", "45", "3.15288",coord,"86",valus,"465498"], (tx, result) => {
+tx.executeSql("INSERT INTO capteurs (lux, celsius, decibel, localisation,batterie,gyroscope,temp) VALUES (?,?,?,?,?,?,?)",
+[ valu , "ND", db,coord,bat,valus,time], (tx, result) => {
   console.log("insertId: " + result.insertId);  // New Id number
   console.log("rowsAffected: " + result.rowsAffected);  // 1
 });
 });},3000);}
 
-
+dropT() {
+  this.database.transaction((tx) => {
+tx.executeSql("DROP TABLE capteurs",
+[], () => {});
+});
+console.log("table effacé");
+}
 
 
 
 
 async getTest() {
-  setInterval(async () => {const valu = await this.locate();
-console.log(valu);},3000);}
+  setInterval(async () => {
+console.log(this.battery);},3000);}
 
 
 
