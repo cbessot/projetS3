@@ -14,13 +14,16 @@ import { Platform } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings/ngx';
 import { Sensors, TYPE_SENSOR } from '@ionic-native/sensors/ngx';
-
+import { BatteryStatus } from '@ionic-native/battery-status/ngx';
+import { DBMeter } from '@ionic-native/db-meter/ngx';
+import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,],
   providers: [
-    
+
     Sensors,
     StatusBar,
     SplashScreen,
@@ -31,8 +34,11 @@ import { Sensors, TYPE_SENSOR } from '@ionic-native/sensors/ngx';
     AlertController,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     OpenNativeSettings,
+    BatteryStatus,
+    DBMeter,
+    Gyroscope,
+    SQLite
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
- 
