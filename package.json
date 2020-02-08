@@ -24,30 +24,38 @@
     "@ionic-native/brightness": "^5.17.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/db-meter": "^5.19.0",
+    "@ionic-native/file": "^5.19.1",
     "@ionic-native/geolocation": "^5.16.0",
     "@ionic-native/gyroscope": "^5.19.0",
+    "@ionic-native/http": "^5.19.1",
     "@ionic-native/open-native-settings": "^5.18.0",
     "@ionic-native/sensors": "^5.19.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/sqlite": "^5.19.0",
+    "@ionic-native/sqlite-porter": "^5.19.1",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
     "angular-svg-round-progressbar": "^3.0.1",
     "cordova-android": "8.1.0",
     "cordova-ios": "5.0.1",
     "cordova-open-native-settings": "^1.5.2",
+    "cordova-plugin-advanced-http": "^2.3.1",
     "cordova-plugin-battery-status": "^2.0.3",
     "cordova-plugin-brightness": "^0.2.0",
     "cordova-plugin-dbmeter": "^2.1.0",
+    "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-gyroscope": "^0.1.4",
     "cordova-plugin-sensors": "git+https://github.com/fabiorogeriosj/cordova-plugin-sensors.git",
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
+    "express": "^4.17.1",
+    "influx": "^5.5.1",
     "moment": "^2.24.0",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
+    "uk.co.workingedge.cordova.plugin.sqliteporter": "^1.1.1",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -103,7 +111,12 @@
       "cordova-plugin-battery-status": {},
       "cordova-plugin-dbmeter": {},
       "cordova-plugin-gyroscope": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-advanced-http": {
+        "OKHTTP_VERSION": "3.10.0"
+      },
+      "uk.co.workingedge.cordova.plugin.sqliteporter": {},
+      "cordova-plugin-file": {}
     },
     "platforms": [
       "android"

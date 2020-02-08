@@ -51,7 +51,7 @@
  *  (window as any).__Zone_enable_cross_context_check = true;
  *
  */
-
+(window as any).global = window;
 import './zone-flags.ts';
 
 /***************************************************************************************************

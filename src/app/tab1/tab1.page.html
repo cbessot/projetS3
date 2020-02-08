@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      ANALYZE
+      ANALYSIS
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -44,9 +44,10 @@
 <!-- Interface to start or stop ANALYZE with start/stop button-->
 <ion-content class="starting_interface">
   <!-- Start button-->
-  <ion-button expand="full" color="primary" (click)="insertD()">Start analyze</ion-button>
-  <!-- Stop button-->
-  <ion-button expand="full" color="danger" (click)="dropT()">Stop analyze</ion-button>
 
-  <ion-button expand="full" color="secondary" (click)="initSensor()">Test initSensor</ion-button>
+  <ion-button expand="full" color="primary" (click)="presentAlertConfirmStartAnalyze()">Start analysis</ion-button>
+  <!-- Stop button-->
+  <ion-button expand="full" color="danger" (click)="stopAnalyze()">Stop analysis</ion-button>
+
+  
 </ion-content>

@@ -18,10 +18,14 @@ import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 import { DBMeter } from '@ionic-native/db-meter/ngx';
 import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { FieldType, InfluxDB, toNanoDate } from 'influx/lib/src';
+import { HTTP } from '@ionic-native/http/ngx';
+import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
+import { File } from '@ionic-native/file/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule],
   providers: [
 
     Sensors,
@@ -37,7 +41,10 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
     BatteryStatus,
     DBMeter,
     Gyroscope,
-    SQLite
+    SQLite,
+    HTTP,
+    SQLitePorter,
+    File
   ],
   bootstrap: [AppComponent]
 })
