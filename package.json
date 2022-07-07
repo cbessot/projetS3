@@ -51,7 +51,7 @@
     "core-js": "^2.5.4",
     "express": "^4.17.1",
     "influx": "^5.5.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
