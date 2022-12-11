@@ -49,7 +49,7 @@
     "cordova-plugin-sensors": "git+https://github.com/fabiorogeriosj/cordova-plugin-sensors.git",
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "influx": "^5.5.1",
     "moment": "^2.24.0",
     "phonegap-plugin-barcodescanner": "^8.1.0",
